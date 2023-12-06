@@ -6,7 +6,7 @@ export default function MovieDetails() {
   const params = useParams();
   console.log(params);
 
-  const [detailsMovie, setDetailsMovie] = useState(null);
+  const [detailsMovie, setDetailsMovie] = useState([]);
 
   useEffect(() => {
     async function getDetails() {
@@ -47,8 +47,16 @@ export default function MovieDetails() {
           </div>
         );
       })} */}
+
       <img src={imgURL()} alt={detailsMovie.title} />
       <h1>{detailsMovie.title}</h1>
+      <p>{detailsMovie.vote_average}</p>
+      <h2>Overviev</h2>
+      <p>{detailsMovie.overview}</p>
+      <h3>Genres</h3>
+      {detailsMovie.genres.map(({ name }, index) => (
+        <p key={index}>{name}</p>
+      ))}
     </div>
   );
 }
