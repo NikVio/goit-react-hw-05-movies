@@ -1,62 +1,67 @@
 import { fetchDetailsMovies } from 'components/MoviesService';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 
 export default function MovieDetails() {
-  const params = useParams();
-  console.log(params);
+  const { movieId } = useParams();
 
   const [detailsMovie, setDetailsMovie] = useState([]);
 
   useEffect(() => {
+    if (movieId === []) {
+      return;
+    }
+  });
+
+  useEffect(() => {
     async function getDetails() {
       try {
-        const fetchDetails = await fetchDetailsMovies(params.movieId);
+        const fetchDetails = await fetchDetailsMovies(movieId);
         setDetailsMovie(fetchDetails);
       } catch (error) {
         console.log('error');
       }
     }
     getDetails();
-  }, [params.movieId]);
+  }, [movieId]);
 
-  const imgURL = () => {
-    const { poster_path } = detailsMovie;
-    const BASE_URL = 'https://image.tmdb.org/t/p/w200';
-    return BASE_URL + poster_path;
-  };
-
+  const { poster_path, title, vote_average, genres, overview } = detailsMovie;
   return (
-    <div>
-      {/* {detailsMovie.map(data => {
-        const {
-          genres: { id, name },
-          poster_path,
-          title,
-          overview,
-          vote_average,
-        } = data;
-        return (
-          <div key={id}>
-            <img src={poster_path} alt={title} />
+    <>
+      {detailsMovie && (
+        <div>
+          <div>
+            {poster_path && (
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                alt={title}
+                width={250}
+              />
+            )}
+          </div>
+          <div>
             <h1>{title}</h1>
-            <p>{vote_average}</p>
+            <p>User score: {Math.round(vote_average * 10)}%</p>
             <h2>Overviev</h2>
             <p>{overview}</p>
             <h3>Genres</h3>
+            {genres &&
+              genres.map((el, index) => {
+                const { name } = el;
+                return <p key={index}>{name}</p>;
+              })}
           </div>
-        );
-      })} */}
-
-      <img src={imgURL()} alt={detailsMovie.title} />
-      <h1>{detailsMovie.title}</h1>
-      <p>{detailsMovie.vote_average}</p>
-      <h2>Overviev</h2>
-      <p>{detailsMovie.overview}</p>
-      <h3>Genres</h3>
-      {detailsMovie.genres.map(({ name }, index) => (
-        <p key={index}>{name}</p>
-      ))}
-    </div>
+          <ul>
+            <li>
+              <NavLink to="cast">Cast</NavLink>
+            </li>
+            <li>
+              <NavLink to="reviews">Reviews</NavLink>
+            </li>
+          </ul>
+          <Outlet />
+        </div>
+      )}
+    </>
   );
 }

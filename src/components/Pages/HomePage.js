@@ -8,6 +8,11 @@ export default function HomePage() {
   //const [IsLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (trendMovies === []) {
+      return;
+    }
+  });
+  useEffect(() => {
     const getMovies = async () => {
       try {
         const { results } = await fetchTrendingMovies();
@@ -22,15 +27,19 @@ export default function HomePage() {
   }, []);
 
   return (
-    <ul>
-      {trendMovies.map((movie, index) => {
-        const { title, id } = movie;
-        return (
-          <li key={index}>
-            <Link to={`/movies/${id}`}>{title}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <div>
+      {trendMovies && (
+        <ul>
+          {trendMovies.map((movie, index) => {
+            const { title, id } = movie;
+            return (
+              <li key={index}>
+                <Link to={`/movies/${id}`}>{title}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
   );
 }
