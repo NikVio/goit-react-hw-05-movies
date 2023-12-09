@@ -8,10 +8,16 @@ export default function Cast() {
   const { movieId } = useParams();
 
   useEffect(() => {
+    if (cast === []) {
+      return;
+    }
+  });
+
+  useEffect(() => {
     async function getCast() {
       try {
-        const fetchCast = await fetchCreditsMovies(movieId);
-        setCast(fetchCast);
+        const { cast } = await fetchCreditsMovies(movieId);
+        setCast([...cast]);
       } catch (error) {
         console.log('error');
       }

@@ -8,7 +8,7 @@ export default function MovieDetails() {
   const [detailsMovie, setDetailsMovie] = useState([]);
 
   useEffect(() => {
-    if (movieId === []) {
+    if (detailsMovie === []) {
       return;
     }
   });
