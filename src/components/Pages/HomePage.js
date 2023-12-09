@@ -31,10 +31,19 @@ export default function HomePage() {
       {trendMovies && (
         <ul>
           {trendMovies.map((movie, index) => {
-            const { title, id } = movie;
+            const { title, id, poster_path } = movie;
             return (
               <li key={index}>
-                <Link to={`/movies/${id}`}>{title}</Link>
+                <Link to={`/movies/${id}`}>
+                  {title}
+                  {poster_path && (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                      alt={title}
+                      width={250}
+                    />
+                  )}
+                </Link>
               </li>
             );
           })}

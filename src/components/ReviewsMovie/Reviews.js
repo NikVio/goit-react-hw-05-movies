@@ -10,8 +10,8 @@ export default function Reviews() {
   useEffect(() => {
     async function getReviews() {
       try {
-        const { reviews } = await fetchReviewsMovies(movieId);
-        setReviews([...reviews]);
+        const { results } = await fetchReviewsMovies(movieId);
+        setReviews([...results]);
       } catch (error) {
         console.log('error');
       }
@@ -22,11 +22,11 @@ export default function Reviews() {
   return (
     <>
       {reviews.map((review, index) => {
-        const { author } = review;
+        const { author, content } = review;
         return (
           <div key={index}>
             <h4>{author}</h4>
-            {/* <p>{content}</p> */}
+            <p>{content}</p>
           </div>
         );
       })}
