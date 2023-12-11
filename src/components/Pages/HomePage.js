@@ -35,7 +35,6 @@ export default function HomePage() {
             return (
               <li key={index}>
                 <Link to={`/movies/${id}`}>
-                  {title}
                   {poster_path && (
                     <img
                       src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
@@ -43,6 +42,7 @@ export default function HomePage() {
                       width={250}
                     />
                   )}
+                  {title}
                 </Link>
               </li>
             );
