@@ -5,6 +5,7 @@ import { fetchSearchMovies } from 'components/MoviesService';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import {
+  MoviesSearchPhotoBox,
   SearchBtn,
   SearchForm,
   SearchInput,
@@ -53,7 +54,6 @@ export default function MoviesPage() {
 
   return (
     <>
-      {isLoading && <Loader />}
       {error && <p>Oops, something went wrong. try reloading the page</p>}
 
       <SearchForm onSubmit={handleSubmit}>
@@ -70,6 +70,7 @@ export default function MoviesPage() {
       </SearchForm>
 
       <SearchMovieBox>
+        {isLoading && <Loader />}
         {movies.length !== 0 && (
           <HomeList>
             {movies.map((movie, index) => {
@@ -78,11 +79,13 @@ export default function MoviesPage() {
                 <HomeItem key={index}>
                   <Link to={`${id}`} state={{ from: location }}>
                     {poster_path && (
-                      <img
-                        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                        alt={original_title}
-                        width="auto"
-                      />
+                      <MoviesSearchPhotoBox>
+                        <img
+                          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                          alt={original_title}
+                          width="auto"
+                        />
+                      </MoviesSearchPhotoBox>
                     )}
 
                     <HomeTitle>{original_title}</HomeTitle>

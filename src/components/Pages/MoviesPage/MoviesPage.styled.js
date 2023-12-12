@@ -48,3 +48,7 @@ export const SearchBtn = styled.button`
 export const SearchMovieBox = styled.div`
   margin-top: 20px;
 `;
+
+export const MoviesSearchPhotoBox = styled.div`
+  min-height: 414px;
+`;
