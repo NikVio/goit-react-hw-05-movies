@@ -11,7 +11,7 @@ export const fetchTrendingMovies = async () => {
 
 export const fetchSearchMovies = async query => {
   const response = await axios.get(
-    `search/movie?query=${query}&include_adult=false&page=1?api_key=${API_KEY}`
+    `search/movie?api_key=${API_KEY}&query=${query}`
   );
   return response.data;
 };

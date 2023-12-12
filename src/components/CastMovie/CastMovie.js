@@ -1,5 +1,5 @@
 import { fetchCreditsMovies } from 'components/MoviesService';
-import noPhoto from '../NotPhoto.png';
+import notPhoto from '../NotPhoto.png';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
@@ -40,7 +40,7 @@ export default function Cast() {
                   width={250}
                 />
               ) : (
-                <img src={noPhoto} alt={name} width={250} />
+                <img src={notPhoto} alt={name} width={250} />
               )}
               <p>{name}</p>
               <span>{character}</span>

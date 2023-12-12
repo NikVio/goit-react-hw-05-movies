@@ -1,11 +1,20 @@
 import { fetchDetailsMovies } from 'components/MoviesService';
-import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
 
   const [detailsMovie, setDetailsMovie] = useState([]);
+
+  const location = useLocation();
+  const backLinkRef = useRef(location);
 
   useEffect(() => {
     if (detailsMovie === []) {
@@ -28,6 +37,7 @@ export default function MovieDetails() {
   const { poster_path, title, vote_average, genres, overview } = detailsMovie;
   return (
     <>
+      <Link to={backLinkRef.current.state?.from ?? '/movies'}>Go back</Link>
       {detailsMovie && (
         <div>
           <div>
