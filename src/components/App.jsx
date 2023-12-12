@@ -2,11 +2,11 @@ import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppLayout } from './AppLayout/AppLayout';
 
-const HomePage = lazy(() => import('./Pages/HomePage'));
+const HomePage = lazy(() => import('./Pages/HomePage/HomePage'));
 const Cast = lazy(() => import('./CastMovie/CastMovie'));
 const NotFound = lazy(() => import('./NotFoundPage'));
-const MovieDetails = lazy(() => import('./Pages/MovieDetails'));
-const MoviesPage = lazy(() => import('./Pages/MoviesPage'));
+const MovieDetails = lazy(() => import('./Pages/MovieDetails/MovieDetails'));
+const MoviesPage = lazy(() => import('./Pages/MoviesPage/MoviesPage'));
 const Reviews = lazy(() => import('./ReviewsMovie/Reviews'));
 
 export const App = () => {

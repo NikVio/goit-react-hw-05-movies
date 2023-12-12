@@ -1,23 +1,24 @@
 import { GlobalStyle } from 'components/GlobalStyle';
 import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { Header, HeaderList, StyledLink } from './AppLayout.styled';
 
 export const AppLayout = () => {
   return (
     <div>
       <Suspense fallback={<p>Loading page...</p>}>
-        <header>
+        <Header>
           <nav>
-            <ul>
+            <HeaderList>
               <li>
-                <NavLink to="/">Home</NavLink>
+                <StyledLink to="/">Home</StyledLink>
               </li>
               <li>
-                <NavLink to="/movies">Movies</NavLink>
+                <StyledLink to="/movies">Movies</StyledLink>
               </li>
-            </ul>
+            </HeaderList>
           </nav>
-        </header>
+        </Header>
         <main>
           <Outlet />
         </main>
